@@ -21,11 +21,9 @@ class IssuingController extends Controller
     public function index()
     {
 
-        $data = Issuing::with(['customer:id,name,address', 'detail_issuings'])
-            ->withSum('detail_issuings', 'qty')
+        $data = Issuing::with(['customer:id,nama,alamat', 'detail_barang_keluars'])
+            ->withSum('detail_barang_keluars', 'qty')
             ->latest()->get();
-
-        // return $data;
 
         return view('pages.transaction.issuing.index', [
             'issuing_data' => $data
@@ -40,16 +38,17 @@ class IssuingController extends Controller
     public function create()
     {
 
-        $items = Item::with(['category_brand'])->get();;
+        $items = Item::with(['kategori_brand'])->get();;
         $category_product = Category_product::all();
 
         $detail_issuing = Detail_Issuing::with([
-            'item:id,name,category_product_id,category_brand_id,qty',
-            'item.category_brand:id,name',
-            'item.category_product:id,name'
+            'item:id,nama,kategori_produk_id,kategori_brand_id,qty',
+            'item.kategori_brand:id,nama',
+            'item.kategori_produk:id,nama'
         ])
-            ->where('issuing_id', 0)
+            ->where('barang_keluar_id', 0)
             ->get();
+
 
 
         return view('pages.transaction.issuing.create', [
@@ -67,8 +66,8 @@ class IssuingController extends Controller
      */
     public function store(Request $request)
     {
+        $detail_issuing = Detail_Issuing::where('barang_keluar_id', 0);
 
-        $detail_issuing = Detail_Issuing::where('issuing_id', 0);
         if ($detail_issuing->exists() == null) {
             return redirect()->back();
         }
@@ -90,26 +89,26 @@ class IssuingController extends Controller
             DB::beginTransaction();
 
             $customer_id = Customer::create([
-                'name' => $validated['customer'],
-                'address' => $validated['address'],
+                'nama' => $validated['customer'],
+                'alamat' => $validated['address'],
             ])->id;
-
-
 
             $issuing_id = Issuing::create([
                 'no_referensi' => $no_referensi,
-                'date' => $validated['date'],
+                'tanggal' => $validated['date'],
                 'customer_id' => $customer_id,
-                'note' => $validated['note']
+                'catatan' => $validated['note']
             ])->id;
 
-            Detail_Issuing::where('issuing_id', 0)->update([
-                'issuing_id' => $issuing_id,
+
+            Detail_Issuing::where('barang_keluar_id', 0)->update([
+                'barang_keluar_id' => $issuing_id,
             ]);
 
             DB::commit();
         } catch (\Throwable $th) {
-            DB::rollBack();
+            // DB::rollBack();
+            dd($th->getMessage());
         }
 
         return redirect('transaction/issuing');
@@ -117,7 +116,6 @@ class IssuingController extends Controller
 
     public function create_no_referens($select_kode_ref)
     {
-        // dd($select_kode_ref);
         if ($select_kode_ref == null) {
             $nota = "OUT" . date('Ymd') . "001";
         } else if (substr($select_kode_ref, 9, 2) != date('d')) {
@@ -138,11 +136,10 @@ class IssuingController extends Controller
      */
     public function show($id)
     {
-
         $data = Issuing::with([
             'customer',
-            'detail_issuings.item.category_brand',
-            'detail_issuings.item.category_product'
+            'detail_barang_keluars.item.kategori_brand',
+            'detail_barang_keluars.item.kategori_produk'
         ])->where('id', $id)->first();
 
         return view('pages.transaction.issuing.detail', [
@@ -160,8 +157,6 @@ class IssuingController extends Controller
     public function edit($id)
     {
         $issuing = Issuing::with('customer')->where('id', $id)->first();
-
-        // return $issuing;
         return view('pages.transaction.issuing.edit', [
             'data' => $issuing,
         ]);
@@ -187,13 +182,13 @@ class IssuingController extends Controller
         try {
             DB::beginTransaction();
             Customer::where('id', $validated['customer_id'])->update([
-                'name' => $validated['name'],
-                'address' => $validated['address'],
+                'nama' => $validated['name'],
+                'alamat' => $validated['address'],
             ]);
 
             Issuing::where('id', $id)->update([
-                'date' => $validated['date'],
-                'note' => $validated['note'],
+                'tanggal' => $validated['date'],
+                'catatan' => $validated['note'],
             ]);
 
             DB::commit();
@@ -235,7 +230,7 @@ class IssuingController extends Controller
 
     public function get_item_ajax($id)
     {
-        $getItem = Item::with('category_brand')->where('category_product_id', $id)->get();
+        $getItem = Item::with('kategori_brand')->where('kategori_brand_id', $id)->get();
         return response()->json([
             'status' => 200,
             'data' => $getItem

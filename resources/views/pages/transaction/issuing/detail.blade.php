@@ -60,15 +60,15 @@
                             </tr>
                             <tr>
                                 <td>Tanggal</td>
-                                <td class="p-2"> : {{ $detail_issuings->date }}</td>
+                                <td class="p-2"> : {{ $detail_issuings->tanggal }}</td>
                             </tr>
                             <tr>
                                 <td>Customer</td>
-                                <td class="p-2"> : {{ $detail_issuings->customer->name }}</td>
+                                <td class="p-2"> : {{ $detail_issuings->customer->nama }}</td>
                             </tr>
                             <tr>
                                 <td>Alamat</td>
-                                <td class="p-2"> : {{ $detail_issuings->customer->address }}</td>
+                                <td class="p-2"> : {{ $detail_issuings->customer->alamat }}</td>
                             </tr>
                         </table>
                     </div>
@@ -78,7 +78,6 @@
                 <div class="card">
                     <div class="card-header p-3 d-flex justify-content-between">
                         List Data Supplier
-
                     </div>
                     <div class="card-body">
                         <table class='table table-striped' id="table1">
@@ -94,12 +93,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($detail_issuings->detail_issuings as $item)
+                                @foreach ($detail_issuings->detail_barang_keluars as $item)
                                     <tr>
                                         <td class="p-3">{{ $loop->iteration }}</td>
-                                        <td class="p-3">{{ $item->item->name }}</td>
-                                        <td class="p-3">{{ $item->item->category_brand->name }}</td>
-                                        <td class="p-3">{{ $item->item->category_product->name }}</td>
+                                        <td class="p-3">{{ $item->item->nama }}</td>
+                                        <td class="p-3">{{ $item->item->kategori_brand->nama }}</td>
+                                        <td class="p-3">{{ $item->item->kategori_produk->nama }}</td>
                                         <td class="p-3">{{ $item->qty }}</td>
                                         <td>
                                             <form action="/transaction/issuing/{{ $item->id }}" method="post"

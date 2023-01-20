@@ -45,7 +45,7 @@
                                                 <label for="name">Nama</label>
                                                 <input type="text" name="name"
                                                     class="form-control @error('name') is-invalid @enderror " id="name"
-                                                    placeholder="nama" value="{{ $supplier->name }}" required>
+                                                    placeholder="nama" value="{{ $supplier->nama }}" required>
                                                 @error('name')
                                                     <div class="valid-feedback">
                                                         <i class="bx bx-radio-circle"></i>
@@ -59,7 +59,7 @@
                                                     class="form-control @error('address')
                                                     is-invalid
                                                 @enderror"
-                                                    id="alamat" placeholder="alamat" value="{{ $supplier->address }}"
+                                                    id="alamat" placeholder="alamat" value="{{ $supplier->alamat }}"
                                                     required>
                                                 @error('address')
                                                     <div class="valid-feedback">
@@ -75,8 +75,8 @@
                                                  @error('phone_number')
                                                     is-invalid
                                                 @enderror "
-                                                    id="telp" placeholder="nomor hp"
-                                                    value="{{ $supplier->phone_number }}" required>
+                                                    id="telp" placeholder="nomor hp" value="{{ $supplier->telp }}"
+                                                    required>
                                                 @error('phone_number')
                                                     <div class="valid-feedback">
                                                         <i class="bx bx-radio-circle"></i>

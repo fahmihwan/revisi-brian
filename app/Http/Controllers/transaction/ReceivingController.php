@@ -17,7 +17,7 @@ class ReceivingController extends Controller
      */
     public function index()
     {
-        $data = Receiving::with(['supplier:id,name', 'category_product:id,name'])
+        $data = Receiving::with(['supplier:id,nama', 'kategori_produk:id,nama'])
             ->latest()->get();
 
         return view('pages.transaction.receiving.index', [
@@ -60,17 +60,17 @@ class ReceivingController extends Controller
         ]);
 
         $data['open_qty'] = $request->target_qty;
-        $check = Receiving::select('ball_number', 'date')->where('date', $request->date);
+        $check = Receiving::select('kode_ball', 'tanggal')->where('tanggal', $request->date);
 
         Receiving::create([
-            'ball_number' => $this->create_ball_number($request, $check),
+            'kode_ball' => $this->create_ball_number($request, $check),
             'supplier_id' => $request->supplier_id,
-            'category_product_id' => $request->category_product_id,
+            'kategori_produk_id' => $request->category_product_id,
             'target_qty' => $request->target_qty,
             'open_qty' => 0,
-            'date' => $request->date,
-            'note' => $request->note,
-            'price' => $request->price,
+            'tanggal' => $request->date,
+            'catatan' => $request->note,
+            'harga' => $request->price,
         ]);
 
         return redirect('/transaction/receiving');
@@ -79,7 +79,7 @@ class ReceivingController extends Controller
     public function create_ball_number($request, $check)
     {
         if ($check->exists()) { //jika ada
-            $getBall = $check->orderBy('ball_number', 'desc')->limit(1)->first();
+            $getBall = $check->orderBy('kode_ball', 'desc')->limit(1)->first();
             $explode_number = explode('-', $getBall->ball_number);
             $increment = (int)$explode_number[1] + 1;
             $data_ball_number = $explode_number[0] . '-' . $increment;
@@ -110,7 +110,7 @@ class ReceivingController extends Controller
     {
 
         $receiving = Receiving::with(['supplier'])
-            ->where('ball_number', $id)->first();
+            ->where('kode_ball', $id)->first();
 
 
         $supplier = Supplier::latest()->get();
@@ -140,13 +140,20 @@ class ReceivingController extends Controller
             'note' => 'required'
         ]);
 
-        $receiving = Receiving::where('ball_number', $ball_number)->first();
+        $receiving = Receiving::where('kode_ball', $ball_number)->first();
 
         if ($receiving->open_qty > $request->target_qty) {
             return redirect()->back()->with('fail', 'Jika TARGET QTY < OPEN QTY, hapus data Receiving secara manual!!. <a href="" class="text-decoration-underline">hapus sekarang!</a> ');
         }
 
-        Receiving::where('ball_number', $ball_number)->update($validate);
+        Receiving::where('kode_ball', $ball_number)->update([
+            'supplier_id' => $validate['supplier_id'],
+            'kategori_produk_id' => $validate['category_product_id'],
+            'target_qty' => $validate['target_qty'],
+            'harga' => $validate['price'],
+            'tanggal' => $validate['date'],
+            'catatan' => $validate['note']
+        ]);
         return redirect('/transaction/manage-receiving/' . $ball_number);
     }
 

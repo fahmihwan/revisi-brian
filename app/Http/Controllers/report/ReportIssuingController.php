@@ -10,6 +10,7 @@ class ReportIssuingController extends Controller
 {
     public function index()
     {
+
         // print
         if (request('print')) {
             $data = Issuing::latest()->filter(request(['start_date', 'end_date']));
@@ -27,8 +28,9 @@ class ReportIssuingController extends Controller
         if (request('start_date')) {
             $data = Issuing::latest()->filter(request(['start_date', 'end_date']))->get();
         } else {
-            $data = Issuing::with(['detail_issuings.item.category_brand', 'detail_issuings.item.category_product', 'customer'])->get();
+            $data = Issuing::with(['detail_barang_keluars.item.kategori_brand', 'detail_barang_keluars.item.kategori_produk', 'customer'])->get();
         }
+
 
         return view('pages.report.issuing.index', [
             'datas' => $data
@@ -37,7 +39,7 @@ class ReportIssuingController extends Controller
     public function print_first($id)
     {
 
-        $data =  Issuing::with(['detail_issuings.item.category_brand', 'detail_issuings.item.category_product', 'customer'])
+        $data =  Issuing::with(['detail_barang_keluars.item.kategori_brand', 'detail_barang_keluars.item.kategori_produk', 'customer'])
             ->where('id', $id)->first();
 
         $pdf = PDF::loadview('pages.report.issuing.print_first', [

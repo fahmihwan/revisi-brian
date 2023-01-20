@@ -8,7 +8,7 @@
     <div class="page-title">
         <div class="row pb-3">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Insert Receiving Transcation </h3>
+                <h3>Tambah barang masuk </h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -26,7 +26,7 @@
             <div class="col-md-9 col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
-                        <h4 class="card-title">Form Receiving Ball</h4>
+                        <h4 class="card-title">Form penerimaan Ball</h4>
                         <a href="/transaction/issuing" class=" me-1 mb-1">
                             <i class="fa-solid fa-arrow-left"></i>
                             Kembali</a>
@@ -51,7 +51,7 @@
                                                 <label for="valid-state">Supplier</label>
                                                 <select name="supplier_id" class="choices form-select">
                                                     @foreach ($supplier as $sup)
-                                                        <option value="{{ $sup->id }}">{{ $sup->name }}</option>
+                                                        <option value="{{ $sup->id }}">{{ $sup->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -59,7 +59,7 @@
                                                 <label for="valid-state">Kategori Produk</label>
                                                 <select name="category_product_id" class="choices form-select">
                                                     @foreach ($category_product as $prodcut)
-                                                        <option value="{{ $prodcut->id }}">{{ $prodcut->name }}</option>
+                                                        <option value="{{ $prodcut->id }}">{{ $prodcut->nama }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

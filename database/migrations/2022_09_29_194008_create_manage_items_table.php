@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('manage_items', function (Blueprint $table) {
+        Schema::create('kelola_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id');
-            $table->foreignId('receiving_id');
+            $table->foreignId('barang_masuk_id');
             $table->integer('qty');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manage_items');
+        Schema::dropIfExists('kelola_items');
     }
 };

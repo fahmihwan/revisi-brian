@@ -18,9 +18,10 @@ class ItemController extends Controller
      */
     public function index()
     {
+
         $data = Item::with([
-            'category_brand:id,name',
-            'category_product:id,name',
+            'kategori_brand:id,nama',
+            'kategori_produk:id,nama',
         ])->get();
 
         return view('pages.master_item.item.index', [
@@ -39,6 +40,7 @@ class ItemController extends Controller
         $category_brand = Category_brand::all();
         $category_product = Category_product::all();
 
+
         return view('pages.master_item.item.create', [
             'category_brand' => $category_brand,
             'category_product' => $category_product,
@@ -53,15 +55,21 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
-            'name' => 'required|unique:items',
+            'name' => 'required',
             'category_product_id' => 'required',
             'category_brand_id' => 'required',
             'qty' => 'required|numeric'
         ]);
 
 
-        Item::create($validated);
+        Item::create([
+            'nama' => $validated['name'],
+            'kategori_produk_id' => $validated['category_product_id'],
+            'kategori_brand_id' => $validated['category_brand_id'],
+            'qty' => $validated['qty'],
+        ]);
         return redirect('master/item');
     }
 
@@ -85,12 +93,13 @@ class ItemController extends Controller
     public function edit($id)
     {
         $data = Item::with([
-            'category_brand:id,name',
-            'category_product:id,name',
+            'kategori_brand:id,nama',
+            'kategori_produk:id,nama',
         ])->where('id', $id)->first();
 
         $category_brand = Category_brand::all();
         $category_product = Category_product::all();
+
 
         return view('pages.master_item.item.edit', [
             'category_brand' => $category_brand,
@@ -109,8 +118,6 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
 
-
-
         $validated = $request->validate([
             'name' => 'required',
             'category_product_id' => 'required|numeric',
@@ -119,7 +126,12 @@ class ItemController extends Controller
         ]);
 
 
-        Item::where('id', $id)->update($validated);
+        Item::where('id', $id)->update([
+            'nama' => $validated['name'],
+            'kategori_produk_id' => $validated['category_product_id'],
+            'kategori_brand_id' => $validated['category_brand_id'],
+            'qty' => $validated['qty'],
+        ]);
         return redirect('master/item');
     }
 

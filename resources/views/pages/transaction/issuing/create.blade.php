@@ -9,7 +9,7 @@
     <div class="page-title">
         <div class="row pb-3">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Insert Issuing Transction </h3>
+                <h3>Tambah barang Keluar </h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -34,7 +34,7 @@
             <div class="col-md-4 col-12">
                 <div class="card">
                     <div class="card-header pb-0 mb-0">
-                        <h4 class="card-title">Vertical Form</h4>
+                        <h4 class="card-title">Form barang keluar</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -51,7 +51,7 @@
                                                         <option value="0"> -- pilih produk --</option>
                                                         @foreach ($category_product as $product)
                                                             <option value="{{ $product->id }}">
-                                                                {{ $product->name }}
+                                                                {{ $product->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -60,7 +60,7 @@
                                             <div class="form-group ">
                                                 <label for="valid-state">Pilih Item</label>
                                                 <div class="form-group ">
-                                                    <select class="form-control js-example-basic-single-2 " name="item_id"
+                                                    <select class="form-control js-example-basic-single-2" name="item_id"
                                                         style="">
                                                         <option value="0"> -- pilih Item --</option>
                                                     </select>
@@ -117,7 +117,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group ">
-                                                <label for="valid-state">alamat</label>
+                                                <label for="valid-state">Alamat</label>
                                                 <div class="form-group ">
                                                     <input type="text" name="address" class="form-control" required>
                                                 </div>
@@ -125,7 +125,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group ">
-                                                <label for="valid-state">note</label>
+                                                <label for="valid-state">Catatan</label>
                                                 <div class="form-group ">
                                                     <textarea name="note" id="" cols="" rows="3" class="form-control" required></textarea>
                                                 </div>
@@ -148,7 +148,7 @@
                                     <th class="p-3">No</th>
                                     <th class="p-3">Item</th>
                                     <th class="p-3">Brand</th>
-                                    <th class="p-3">Category</th>
+                                    <th class="p-3">Kategori</th>
                                     <th class="p-3">Qty</th>
                                     <th class="p-0">Action</th>
                                 </tr>
@@ -157,9 +157,9 @@
                                 @foreach ($detail_issuings as $detail)
                                     <tr>
                                         <td class="p-3">{{ $loop->iteration }}</td>
-                                        <td class="p-3">{{ $detail->item->name }} </td>
-                                        <td class="p-3">{{ $detail->item->category_brand->name }}</td>
-                                        <td class="p-3">{{ $detail->item->category_product->name }}</td>
+                                        <td class="p-3">{{ $detail->item->nama }} </td>
+                                        <td class="p-3">{{ $detail->item->kategori_brand->nama }}</td>
+                                        <td class="p-3">{{ $detail->item->kategori_produk->nama }}</td>
                                         <td class="p-3">{{ $detail->qty }}</td>
                                         <td style="padding: 0px;">
                                             <form action="/transaction/detail_issuing/{{ $detail->id }}" method="post"
@@ -220,9 +220,10 @@
                     let textData = []
                     if (res.status == 200) {
                         res.data.forEach(e => {
+
                             textData.push({
                                 id: e.id,
-                                text: `[${e.category_brand.name}] -- ${e.name}`,
+                                text: `[${e.nama}] -- ${e.nama}`,
                             })
                         });
 

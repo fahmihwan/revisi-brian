@@ -10,24 +10,24 @@ class Issuing extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $table = 'barang_keluars';
 
     public function customer()
     {
         return $this->belongsTo(Customer::class)->withTrashed();
     }
 
-    //tes
-    public function detail_issuings()
+    public function detail_barang_keluars()
     {
-        return $this->hasMany(Detail_Issuing::class);
+        return $this->hasMany(Detail_Issuing::class, 'barang_keluar_id');
     }
 
     public function scopeFilter($query, array $filters)
     {
         return  $query->with([
-            'detail_issuings.item.category_brand',
-            'detail_issuings.item.category_product',
+            'detail_barang_keluars.item.kategori_brand',
+            'detail_barang_keluars.item.kategori_produk',
             'customer'
-        ])->whereDate('date', '>=', $filters['start_date'])->whereDate('date', '<=', $filters['end_date']);
+        ])->whereDate('tanggal', '>=', $filters['start_date'])->whereDate('tanggal', '<=', $filters['end_date']);
     }
 }

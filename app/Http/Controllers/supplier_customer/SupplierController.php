@@ -46,7 +46,11 @@ class SupplierController extends Controller
             'phone_number' => 'required',
         ]);
 
-        Supplier::create($data);
+        Supplier::create([
+            'nama' => $data['name'],
+            'alamat' => $data['address'],
+            'telp' => $data['phone_number'],
+        ]);
         return redirect('/supplier-customer/supplier');
     }
 
@@ -91,7 +95,11 @@ class SupplierController extends Controller
             'phone_number' => 'required',
         ]);
 
-        Supplier::where('id', $id)->update($data);
+        Supplier::where('id', $id)->update([
+            'nama' => $data['name'],
+            'alamat' => $data['address'],
+            'telp' => $data['phone_number'],
+        ]);
 
 
         return redirect('/supplier-customer/supplier');

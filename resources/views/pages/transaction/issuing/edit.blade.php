@@ -48,24 +48,24 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="name">Tanggal</label>
-                                                <input type="date" value="{{ $data->date }}" name="date"
+                                                <input type="date" value="{{ $data->tanggal }}" name="date"
                                                     class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <input type="hidden" value="{{ $data->customer->id }}" name="customer_id"
                                                     class="form-control">
                                                 <label for="name">Nama</label>
-                                                <input type="text" value="{{ $data->customer->name }}" name="name"
+                                                <input type="text" value="{{ $data->customer->nama }}" name="name"
                                                     class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label for="name">Alamat</label>
-                                                <input type="text" value="{{ $data->customer->address }}" name="address"
+                                                <input type="text" value="{{ $data->customer->alamat }}" name="address"
                                                     class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label for="name">notes</label>
-                                                <textarea name="note" class="form-control" id="" cols="30" rows="5">{{ $data->note }}</textarea>
+                                                <label for="name">Catatan</label>
+                                                <textarea name="note" class="form-control" id="" cols="30" rows="5">{{ $data->catatan }}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end">

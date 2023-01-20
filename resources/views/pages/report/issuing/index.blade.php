@@ -8,13 +8,13 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Report Issuing</h3>
+                <h3>Laporan Barang Keluar</h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">master</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">List Issuing </li>
+                        <li class="breadcrumb-item"><a href="index.html">laporan</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">List Barang Keluar</li>
                     </ol>
                 </nav>
             </div>
@@ -87,14 +87,14 @@
                         @foreach ($datas as $data)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $data->date }}</td>
+                                <td class="p-3">{{ $data->tanggal }}</td>
                                 <td class="p-3">{{ $data->no_referensi }}</td>
-                                <td class="p-3">{{ $data->customer->name }}</td>
-                                <td class="p-3">{{ $data->customer->address }}</td>
+                                <td class="p-3">{{ $data->customer->nama }}</td>
+                                <td class="p-3">{{ $data->customer->alamat }}</td>
                                 <td class="p-3">
                                     <ul>
-                                        @foreach ($data->detail_issuings as $detail)
-                                            <li> {{ $detail->item->name }} - {{ $detail->qty }}</li>
+                                        @foreach ($data->detail_barang_keluars as $detail)
+                                            <li> {{ $detail->item->nama }} - {{ $detail->qty }}</li>
                                         @endforeach
                                     </ul>
                                 </td>

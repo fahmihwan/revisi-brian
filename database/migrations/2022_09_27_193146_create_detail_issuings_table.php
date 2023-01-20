@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detail_issuings', function (Blueprint $table) {
+        Schema::create('detail_barang_keluars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('issuing_id');
+            $table->foreignId('barang_keluar_id');
             $table->foreignId('item_id');
             $table->integer('qty');
             $table->timestamps();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail_issuings');
+        Schema::dropIfExists('detail_barang_keluars');
     }
 };

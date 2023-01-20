@@ -8,14 +8,14 @@
     <div class="page-title">
         <div class="row pb-3">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Manage Receiving Transcation </h3>
+                <h3>Kelola Barang Masuk</h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">master</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Supplier </li>
-                        <li class="breadcrumb-item active" aria-current="page">create </li>
+                        <li class="breadcrumb-item"><a href="index.html">tansaksi</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">barang masuk </li>
+                        <li class="breadcrumb-item active" aria-current="page">tambah</li>
                     </ol>
                 </nav>
             </div>
@@ -31,18 +31,18 @@
                         <li class="nav-item">
 
                             <a class="nav-link fw-bold me-2 border-bottom border-3 border-primary"
-                                href="/transaction/manage-receiving/{{ $receiving->ball_number }}">
+                                href="/transaction/manage-receiving/{{ $receiving->kode_ball }}">
                                 List
                                 Item</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link "
-                                href="/transaction/manage-receiving/{{ $receiving->ball_number }}/create">Tambah
+                                href="/transaction/manage-receiving/{{ $receiving->kode_ball }}/create">Tambah
                                 Item</a>
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <a href="/transaction/receiving/{{ $receiving->ball_number }}/edit" class="nav-link text-warning">
+                        <a href="/transaction/receiving/{{ $receiving->kode_ball }}/edit" class="nav-link text-warning">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                         <a href="/transaction/receiving" class="nav-link"> <i class="fa-solid fa-arrow-left"></i>
@@ -55,17 +55,17 @@
                         <div class="col-6">
                             <table>
                                 <tr>
-                                    <td class="pe-2">Ball Number</td>
-                                    <td>: {{ $receiving->ball_number }}</td>
+                                    <td class="pe-2">Kode Ball</td>
+                                    <td>: {{ $receiving->kode_ball }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Date</td>
-                                    <td>: {{ $receiving->date }}</td>
+                                    <td>Tanggal</td>
+                                    <td>: {{ $receiving->tanggal }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>Note</td>
-                                    <td>: {{ $receiving->note }}</td>
+                                    <td>Catatan</td>
+                                    <td>: {{ $receiving->catatan }}</td>
                                 </tr>
 
                             </table>
@@ -73,8 +73,8 @@
                         <div class="col-6">
                             <table>
                                 <tr>
-                                    <td class="pe-3">Category Product</td>
-                                    <td>: <span class="badge bg-info">{{ $receiving->category_product->name }} </span>
+                                    <td class="pe-3">Kategori Produk</td>
+                                    <td>: <span class="badge bg-info">{{ $receiving->kategori_produk->nama }} </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -104,7 +104,7 @@
                         <tr>
                             <th class="p-1">No</th>
                             <th class="p-1">Name</th>
-                            <th class="p-1">Category Brand</th>
+                            <th class="p-1">Kategori Brand</th>
                             <th class="p-1">qty</th>
                             <th class="p-1">Action</th>
                         </tr>
@@ -113,8 +113,8 @@
                         @foreach ($manage_item as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td class="p-1"> {{ $item->item->name }}</td>
-                                <td class="p-1"> {{ $item->item->category_brand->name }}</td>
+                                <td class="p-1"> {{ $item->item->nama }}</td>
+                                <td class="p-1"> {{ $item->item->kategori_brand->nama }}</td>
                                 <td class="p-1"> {{ $item->qty }}</td>
                                 <td>
                                     <form action="/transaction/manage-receiving/{{ $item->id }}" method="post"

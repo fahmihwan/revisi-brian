@@ -9,8 +9,6 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>List Kategori Produk</h3>
-                {{-- <a href="/master/kategori-prouduk/create" class="btn btn-sm round  btn-primary mb-3">tambah data</a> --}}
-
                 <!-- Button trigger for basic modal -->
                 <button type="button" class="btn btn-sm round  btn-primary mb-3" data-bs-toggle="modal"
                     data-bs-target="#default">
@@ -98,7 +96,7 @@
                         @foreach ($kategori as $data)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $data->name }}</td>
+                                <td class="p-3">{{ $data->nama }}</td>
                                 <td style="padding: 0px;">
                                     <a href="/master/kategori-produk/{{ $data->id }}/edit"
                                         class="btn badge btn-sm round btn-warning ">

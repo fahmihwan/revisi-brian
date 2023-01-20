@@ -54,19 +54,19 @@
         <table style="width: 1000px">
             <tr>
                 <td>Date</td>
-                <td>{{ $item->date }}</td>
+                <td>{{ $item->tanggal }}</td>
             </tr>
             <tr>
                 <td>Ball Number</td>
-                <td>{{ $item->ball_number }}</td>
+                <td>{{ $item->kode_ball }}</td>
             </tr>
             <tr>
                 <td>Supplier</td>
-                <td>{{ $item->supplier->name }}</td>
+                <td>{{ $item->supplier->nama }}</td>
             </tr>
             <tr>
                 <td>Categori</td>
-                <td>{{ $item->category_product->name }}</td>
+                <td>{{ $item->kategori_produk->nama }}</td>
             </tr>
             <tr>
                 <td>Target Qty</td>
@@ -78,7 +78,7 @@
             </tr>
             <tr>
                 <td>Price</td>
-                <td>{{ $item->price }}</td>
+                <td>{{ $item->harga }}</td>
             </tr>
 
         </table>

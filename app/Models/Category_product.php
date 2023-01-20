@@ -10,5 +10,7 @@ class Category_product extends Model
 {
     use HasFactory, SoftDeletes;
 
+
     protected $guarded = ['id'];
+    protected $table = "kategori_produks";
 }

@@ -44,9 +44,9 @@
                         @foreach ($items as $item)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $item->name }}</td>
-                                <td class="p-3">{{ $item->category_brand->name }}</td>
-                                <td class="p-3">{{ $item->category_product->name }}</td>
+                                <td class="p-3">{{ $item->nama }}</td>
+                                <td class="p-3">{{ $item->kategori_brand->nama }}</td>
+                                <td class="p-3">{{ $item->kategori_produk->nama }}</td>
                                 <td class="p-3">{{ $item->qty }}</td>
                                 <td style="padding: 0px;">
                                     <a href="/master/item/{{ $item->id }}/edit"

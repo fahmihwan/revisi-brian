@@ -45,7 +45,6 @@ class Manage_itemController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
             'ball_number' => 'required',
             'category_product_id' => 'required|numeric',
@@ -53,17 +52,19 @@ class Manage_itemController extends Controller
             'open_qty' => 'required|numeric'
         ]);
 
-        // item update nanti 
-        $getItem = Item::where('category_product_id', '=', $request->category_product_id)
+        // item update nanti
+        $getItem = Item::where('kategori_produk_id', '=', $request->category_product_id)
             ->where('id', '=', $request->name);
+
 
         if ($getItem->exists() == null) { //cek jika tidak ada
             return redirect()->back()->with('fail', 'Fail !!, Item Belum ada, mau menambahkan Item sekarang? <a href="/master/item/create"
             class="text-decoration-underline ">
             Ya, tambah Item Sekarang</a>');
         }
-        // get open_qty from receiving 
-        $get_receiving = Receiving::where('ball_number', $request->ball_number)->first();
+        // get open_qty from receiving
+        $get_receiving = Receiving::where('kode_ball', $request->ball_number)->first();
+
         $current_open_qty_receiving = $get_receiving->open_qty;
         $current_open_qty_receiving += $request->open_qty;
 
@@ -73,13 +74,14 @@ class Manage_itemController extends Controller
         }
         ///update qty from item now
         $data_item = $getItem->first();
+
         $current_qty_item =  $data_item->qty;
         $current_qty_item += $request->open_qty;
 
         try {
             DB::beginTransaction();
 
-            Receiving::where('ball_number', $request->ball_number)->update([
+            Receiving::where('kode_ball', $request->ball_number)->update([
                 'open_qty' => $current_open_qty_receiving,
             ]);
 
@@ -89,7 +91,7 @@ class Manage_itemController extends Controller
 
             Manage_item::create([
                 'item_id' => $data_item->id,
-                'receiving_id' => $get_receiving->id,
+                'barang_masuk_id' => $get_receiving->id,
                 'qty' => $request->open_qty
             ]);
 
@@ -109,13 +111,13 @@ class Manage_itemController extends Controller
      */
     public function show($id)
     {
-        $receiving = Receiving::with('category_product')
-            ->where(['ball_number' => $id])->first();
+        $receiving = Receiving::with('kategori_produk')
+            ->where(['kode_ball' => $id])->first();
 
         $get_id_from_receiving = $receiving->id;
 
-        $manage_item = Manage_item::with(['item.category_brand'])
-            ->where(['receiving_id' => $get_id_from_receiving])
+        $manage_item = Manage_item::with(['item.kategori_brand'])
+            ->where(['barang_masuk_id' => $get_id_from_receiving])
             ->get();
 
         return view('pages.transaction.manage_item.index', [
@@ -192,20 +194,16 @@ class Manage_itemController extends Controller
 
 
 
-    public function create_manage_receiving($ball_number)
+    public function create_manage_receiving($kode_ball)
     {
 
-        $receiving =  Receiving::with(['category_product:id,name'])
-            ->where('ball_number', $ball_number)->first();
+        $receiving =  Receiving::with(['kategori_produk:id,nama'])
+            ->where('kode_ball', $kode_ball)->first();
 
 
-        $items = Item::with('category_brand')->where('category_product_id', $receiving->category_product_id)->get();;
-        // return $items;
+        $items = Item::with('kategori_produk')->where('kategori_produk_id', $receiving->kategori_produk_id)->get();
 
-
-        $category_brand = Category_brand::with(['items'])
-            ->latest()->get();
-
+        $category_brand = Category_brand::with('items')->get();
 
         // return $items;
         return view('pages.transaction.manage_item.create', [

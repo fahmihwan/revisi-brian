@@ -49,24 +49,24 @@
         <table>
             <tr>
                 <th>No</th>
-                <th>Date</th>
-                <th>Ball Number</th>
+                <th>Tanggal</th>
+                <th>Kode Ball</th>
                 <th>Supplier</th>
-                <th>Category </th>
+                <th>Kategori</th>
                 <th>Target Qty</th>
                 <th>Open Qty</th>
-                <th>Total Price</th>
+                <th>Total Harga</th>
             </tr>
             @foreach ($datas as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->date }}</td>
-                    <td>{{ $data->ball_number }}</td>
-                    <td>{{ $data->supplier->name }}</td>
-                    <td>{{ $data->category_product->name }}</td>
+                    <td>{{ $data->tanggal }}</td>
+                    <td>{{ $data->kode_ball }}</td>
+                    <td>{{ $data->supplier->nama }}</td>
+                    <td>{{ $data->kategori_produk->nama }}</td>
                     <td>{{ $data->target_qty }}</td>
                     <td>{{ $data->open_qty }}</td>
-                    <td>{{ 'Rp' . $data->price }}</td>
+                    <td>{{ 'Rp' . $data->harga }}</td>
                 </tr>
             @endforeach
 

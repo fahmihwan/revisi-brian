@@ -9,7 +9,7 @@ class Detail_Issuing extends Model
 {
     use HasFactory;
 
-    protected $table = 'detail_issuings';
+    protected $table = 'detail_barang_keluars';
     protected $guarded = ['id'];
 
     public function item()

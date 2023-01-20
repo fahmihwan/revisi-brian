@@ -27,7 +27,7 @@ class ReportReceivingController extends Controller
         if (request('start_date')) {
             $data = Receiving::latest()->filter(request(['start_date', 'end_date']))->get();
         } else {
-            $data = Receiving::with(['supplier:id,name', 'category_product:id,name'])->get();
+            $data = Receiving::with(['supplier:id,nama', 'kategori_produk:id,nama'])->get();
         }
 
         return view('pages.report.receiving.index', [
@@ -38,7 +38,7 @@ class ReportReceivingController extends Controller
 
     public function print_first($id)
     {
-        $data = Receiving::with(['supplier:id,name', 'category_product:id,name'])
+        $data = Receiving::with(['supplier:id,nama', 'kategori_produk:id,nama'])
             ->where('id', $id)->first();
 
 

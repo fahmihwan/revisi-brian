@@ -32,8 +32,8 @@
                     <thead>
                         <tr>
                             <th class="p-3">No</th>
-                            <th class="p-3">Name</th>
-                            <th class="p-3">Address</th>
+                            <th class="p-3">Nama</th>
+                            <th class="p-3">Alamat</th>
                             <th class="p-0">Action</th>
                         </tr>
                     </thead>
@@ -41,8 +41,8 @@
                         @foreach ($data_customer as $customer)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $customer->name }}</td>
-                                <td class="p-3">{{ $customer->address }}</td>
+                                <td class="p-3">{{ $customer->nama }}</td>
+                                <td class="p-3">{{ $customer->alamat }}</td>
                                 <td style="padding: 0px;">
                                     <a href="/supplier-customer/customer/{{ $customer->id }}/edit"
                                         class="btn badge btn-sm round btn-warning ">

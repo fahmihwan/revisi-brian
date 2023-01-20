@@ -96,13 +96,13 @@
                         @foreach ($datas as $data)
                             <tr class="p-0 m-0 ">
                                 <td class="p-2">{{ $loop->iteration }}</td>
-                                <td class="p-2" style="width: 115px;">{{ $data->date }}</td>
-                                <td class="p-1" style="width:140px;">{{ $data->ball_number }}</td>
-                                <td class="p-2" style="width:35px;">{{ $data->supplier->name }}</td>
-                                <td class="p-2">{{ $data->category_product->name }}</td>
+                                <td class="p-2" style="width: 115px;">{{ $data->tanggal }}</td>
+                                <td class="p-1" style="width:140px;">{{ $data->kode_ball }}</td>
+                                <td class="p-2" style="width:35px;">{{ $data->supplier->nama }}</td>
+                                <td class="p-2">{{ $data->kategori_produk->nama }}</td>
                                 <td class="p-0">{{ $data->target_qty }}</td>
                                 <td class="p-2">{{ $data->open_qty }}</td>
-                                <td class="p-2">{{ 'Rp' . $data->price }}</td>
+                                <td class="p-2">{{ 'Rp' . $data->harga }}</td>
                                 <td style="padding: 0px;">
                                     <a href="/report/receiving/{{ $data->id }}/print"
                                         class="btn badge btn-sm round btn-info ">

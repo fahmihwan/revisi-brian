@@ -41,7 +41,7 @@
                                                 <input type="text" name="name"
                                                     class="form-control  @error('name') is-invalid @enderror"
                                                     id="valid-state" placeholder="Kategori Produk"
-                                                    value="{{ $data->name }}" required>
+                                                    value="{{ $data->nama }}" required>
                                                 @error('name')
                                                     <div class="valid-feedback">
                                                         <i class="bx bx-radio-circle"></i>

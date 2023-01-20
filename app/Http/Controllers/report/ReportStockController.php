@@ -14,7 +14,7 @@ class ReportStockController extends Controller
     public function index()
     {
 
-        $item = Item::with(['category_brand', 'category_product'])->get();
+        $item = Item::with(['kategori_brand', 'kategori_produk'])->get();
         return view('pages.report.stock.index', [
             'items' => $item
         ]);
@@ -22,7 +22,7 @@ class ReportStockController extends Controller
 
     public function print_first($id)
     {
-        $item = Item::with(['category_brand', 'category_product'])
+        $item = Item::with(['kategori_brand', 'kategori_produk'])
             ->where('id', $id)->first();
 
         $pdf = PDF::loadview('pages.report.stock.print_first', [
@@ -35,15 +35,15 @@ class ReportStockController extends Controller
 
     public function print_stock()
     {
-        $item = Item::with(['category_brand', 'category_product'])->get();
+        $item = Item::with(['kategori_brand', 'kategori_produk'])->get();
 
-        return view('pages.report.issuing.index', [
-            'item' => $item
-        ]);
-        // $pdf = PDF::loadview('pages.report.stock.print', [
+        // return view('pages.report.stock.print', [
         //     'items' => $item
         // ]);
+        $pdf = PDF::loadview('pages.report.stock.print', [
+            'items' => $item
+        ]);
 
-        // return $pdf->download('laporan-stok-pdf');
+        return $pdf->download('laporan-stok-pdf');
     }
 }

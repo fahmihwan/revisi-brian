@@ -46,7 +46,7 @@
 
 <body>
     <div class="header">
-        <h4>Report Barang</h4> <br>
+        <h4>Laporan Barang</h4> <br>
         <h6 style="">Buka Tutup Second</h6>
         <p style="">Jl Godean, Km 7 Semarangan, Sleman Daerah Istimewa Yogyakarta Kode Pos 55285</p>
     </div>
@@ -54,15 +54,15 @@
         <table style="width: 1000px">
             <tr>
                 <td>Item</td>
-                <td>{{ $item->name }}</td>
+                <td>{{ $item->nama }}</td>
             </tr>
             <tr>
                 <td>Brand</td>
-                <td>{{ $item->category_brand->name }}</td>
+                <td>{{ $item->kategori_brand->nama }}</td>
             </tr>
             <tr>
                 <td>Category</td>
-                <td>{{ $item->category_product->name }}</td>
+                <td>{{ $item->kategori_produk->nama }}</td>
             </tr>
             <tr>
                 <td>Qty</td>

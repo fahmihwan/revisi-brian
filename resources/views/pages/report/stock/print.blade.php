@@ -51,16 +51,16 @@
                 <th>No</th>
                 <th>Item</th>
                 <th>Brand</th>
-                <th>Category</th>
+                <th>Kategori</th>
                 <th>Qty</th>
             </tr>
             </tr>
             @foreach ($items as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->category_brand->name }}</td>
-                    <td>{{ $item->category_product->name }}</td>
+                    <td>{{ $item->nama }}</td>
+                    <td>{{ $item->kategori_brand->nama }}</td>
+                    <td>{{ $item->kategori_produk->nama }}</td>
                     <td>{{ $item->qty }}</td>
                 </tr>
             @endforeach

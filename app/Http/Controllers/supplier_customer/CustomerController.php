@@ -45,7 +45,10 @@ class CustomerController extends Controller
             'address' => 'required',
         ]);
 
-        Customer::create($data);
+        Customer::create([
+            'nama' => $data['name'],
+            'alamat' => $data['address']
+        ]);
         return redirect('/supplier-customer/customer');
     }
 
@@ -89,7 +92,10 @@ class CustomerController extends Controller
             'address' => 'required',
         ]);
 
-        Customer::where('id', $id)->update($data);
+        Customer::where('id', $id)->update([
+            'nama' => $data['name'],
+            'alamat' => $data['address']
+        ]);
         return redirect('/supplier-customer/customer');
     }
 

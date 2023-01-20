@@ -8,7 +8,7 @@
     <div class="page-title">
         <div class="row pb-3">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Edit Receiving</h3>
+                <h3>Edit Barang Masuk</h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -32,14 +32,14 @@
             <div class="col-md-12 col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
-                        <h4 class="card-title">Form Edit Receiving</h4>
-                        <a href="/transaction/manage-receiving/{{ $receiving->ball_number }}" class=" me-1 mb-1">
+                        <h4 class="card-title">Form Edit Barang Masuk</h4>
+                        <a href="/transaction/manage-receiving/{{ $receiving->kode_ball }}" class=" me-1 mb-1">
                             <i class="fa-solid fa-arrow-left"></i>
                             Kembali</a>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="/transaction/receiving/{{ $receiving->ball_number }}" method="POST"
+                            <form action="/transaction/receiving/{{ $receiving->kode_ball }}" method="POST"
                                 class="form form-vertical">
                                 @method('PUT')
                                 @csrf
@@ -47,9 +47,9 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="valid-state">Ball Number</label>
+                                                <label for="valid-state">Kode Ball</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $receiving->ball_number }}" disabled>
+                                                    value="{{ $receiving->kode_ball }}" disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label for="valid-state">Pilih Supplier</label>
@@ -57,9 +57,9 @@
                                                     <select name="supplier_id"
                                                         class="js-example-basic-single-1 form-select">
                                                         <option value="{{ $receiving->supplier->id }}">
-                                                            {{ $receiving->supplier->name }}</option>
+                                                            {{ $receiving->supplier->nama }}</option>
                                                         @foreach ($supplier as $sup)
-                                                            <option value="{{ $sup->id }}">{{ $sup->name }}
+                                                            <option value="{{ $sup->id }}">{{ $sup->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -70,10 +70,10 @@
                                                 <div class="form-group">
                                                     <select name="category_product_id"
                                                         class="js-example-basic-single-1 form-select">
-                                                        <option value="{{ $receiving->category_product->id }}">
-                                                            {{ $receiving->category_product->name }}</option>
+                                                        <option value="{{ $receiving->kategori_produk->id }}">
+                                                            {{ $receiving->kategori_produk->nama }}</option>
                                                         @foreach ($category_product as $category)
-                                                            <option value="{{ $category->id }}">{{ $category->name }}
+                                                            <option value="{{ $category->id }}">{{ $category->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -83,7 +83,7 @@
                                             <div class="form-group">
                                                 <label for="valid-state">Tanggal</label>
                                                 <input type="date" name="date" class="form-control"
-                                                    value="{{ $receiving->date }}">
+                                                    value="{{ $receiving->tanggal }}">
                                             </div>
                                         </div>
                                         <div class="col-6">
@@ -104,11 +104,11 @@
                                             <div class="form-group">
                                                 <label for="valid-state">Harga</label>
                                                 <input type="number" name="price" class="form-control"
-                                                    value="{{ $receiving->price }}">
+                                                    value="{{ $receiving->harga }}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="valid-state">Note</label>
-                                                <textarea name="note" class="form-control" id="" cols="10" rows="3">{{ $receiving->note }}</textarea>
+                                                <label for="valid-state">Catatan</label>
+                                                <textarea name="note" class="form-control" id="" cols="10" rows="3">{{ $receiving->catatan }}</textarea>
                                             </div>
                                             <div class="col-12 d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>

@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('master/item', ItemController::class);
     Route::resource('transaction/receiving', ReceivingController::class);
     Route::resource('transaction/manage-receiving', Manage_itemController::class);
-    Route::get('transaction/manage-receiving/{ball_number}/create', [Manage_itemController::class, 'create_manage_receiving']);
+    Route::get('transaction/manage-receiving/{kode_ball}/create', [Manage_itemController::class, 'create_manage_receiving']);
 
     Route::resource('transaction/issuing', IssuingController::class);
     Route::get('transaction/issuing/{id}/get-item-ajax', [IssuingController::class, 'get_item_ajax']);

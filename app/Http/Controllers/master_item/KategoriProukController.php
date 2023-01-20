@@ -46,7 +46,9 @@ class KategoriProukController extends Controller
             'name' => 'required',
         ]);
 
-        Category_product::create($validated);
+        Category_product::create([
+            'nama' => $validated['name']
+        ]);
         return redirect('/master/kategori-produk');
     }
 
@@ -90,7 +92,9 @@ class KategoriProukController extends Controller
         ]);
 
 
-        Category_product::where('id', $id)->update($validated);
+        Category_product::where('id', $id)->update([
+            'nama' => $validated['name']
+        ]);
         return redirect('/master/kategori-produk');
     }
 

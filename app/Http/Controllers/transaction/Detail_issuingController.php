@@ -38,14 +38,17 @@ class Detail_issuingController extends Controller
      */
     public function store(Request $request)
     {
+
         $valdated = $request->validate([
             'category_product_id' => 'required|numeric',
             'item_id' => 'required|numeric',
             'qty' => 'required|numeric',
         ]);
 
+
         $item = Item::where('id', $valdated['item_id'])->first();
         $currentItem = $item->qty - $valdated['qty'];
+
         if ($currentItem < 0) {
             return redirect()->back()->with('fail', 'stock tidak cukup');
         }
@@ -55,8 +58,12 @@ class Detail_issuingController extends Controller
             Item::where('id', $valdated['item_id'])->update([
                 'qty' => $currentItem
             ]);
-            $valdated['issuing_id'] = 0;
-            Detail_Issuing::create($valdated);
+
+            Detail_Issuing::create([
+                'barang_keluar_id' => 0,
+                'item_id' => $valdated['item_id'],
+                'qty' => $valdated['qty'],
+            ]);
 
             DB::commit();
         } catch (\Throwable $th) {

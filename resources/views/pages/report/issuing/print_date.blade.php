@@ -58,14 +58,14 @@
             @foreach ($items as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->date }}</td>
+                    <td>{{ $data->tanggal }}</td>
                     <td>{{ $data->no_referensi }}</td>
-                    <td>{{ $data->customer->name }}</td>
-                    <td>{{ $data->customer->address }}</td>
+                    <td>{{ $data->customer->nama }}</td>
+                    <td>{{ $data->customer->alamat }}</td>
                     <td style="padding-left: 20px;">
                         <ul>
-                            @foreach ($data->detail_issuings as $detail)
-                                <li> {{ $detail->item->name }} - {{ $detail->qty }}</li>
+                            @foreach ($data->detail_barang_keluars as $detail)
+                                <li> {{ $detail->item->nama }} - {{ $detail->qty }}</li>
                             @endforeach
                         </ul>
                     </td>

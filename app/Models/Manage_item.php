@@ -10,13 +10,14 @@ class Manage_item extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $table = 'kelola_items';
 
     public function item()
     {
         return $this->belongsTo(Item::class)->withTrashed();
     }
 
-    public function category_brand()
+    public function kategori_brand()
     {
         return $this->belongsTo(Category_brand::class);
     }

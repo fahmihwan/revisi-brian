@@ -10,13 +10,15 @@ class Receiving extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $table = 'barang_masuks';
+
 
     public function supplier()
     {
         return $this->belongsTo(Supplier::class)->withTrashed();
     }
 
-    public function category_product()
+    public function kategori_produk()
     {
         return $this->belongsTo(Category_product::class)->withTrashed();
     }
@@ -24,10 +26,10 @@ class Receiving extends Model
     public function scopeFilter($query, array $filters)
     {
         return  $query->with([
-            'supplier:id,name',
-            'category_product:id,name'
+            'supplier:id,nama',
+            'kategori_produk:id,nama'
         ])
-            ->whereDate('date', '>=', $filters['start_date'])
-            ->whereDate('date', '<=', $filters['end_date']);
+            ->whereDate('tanggal', '>=', $filters['start_date'])
+            ->whereDate('tanggal', '<=', $filters['end_date']);
     }
 }

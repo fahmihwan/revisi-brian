@@ -39,7 +39,7 @@
                             <th class="p-3">No</th>
                             <th class="p-3">Item</th>
                             <th class="p-3">Brand</th>
-                            <th class="p-3">Category</th>
+                            <th class="p-3">Kategori</th>
                             <th class="p-3">Qty</th>
                             <th class="p-0">Action</th>
                         </tr>
@@ -48,9 +48,9 @@
                         @foreach ($items as $item)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $item->name }}</td>
-                                <td class="p-3">{{ $item->category_brand->name }}</td>
-                                <td class="p-3">{{ $item->category_product->name }}</td>
+                                <td class="p-3">{{ $item->nama }}</td>
+                                <td class="p-3">{{ $item->kategori_brand->nama }}</td>
+                                <td class="p-3">{{ $item->kategori_produk->nama }}</td>
                                 <td class="p-3">{{ $item->qty }}</td>
                                 <td style="padding: 0px;">
                                     <a href="/report/stock/{{ $item->id }}/print"

@@ -14,19 +14,18 @@ class Item extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function category_brand()
+    public function kategori_brand()
     {
         return $this->belongsTo(Category_brand::class)->withTrashed();
     }
 
-
-    public function category_product()
+    public function kategori_produk()
     {
         return $this->belongsTo(Category_product::class)->withTrashed();
     }
 
-    //   public function item()
-    // {
-    //     return $this->belongsToManys(Item::class);
-    // }
+    public function items()
+    {
+        return $this->belongsToManys(Item::class);
+    }
 }

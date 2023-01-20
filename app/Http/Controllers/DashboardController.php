@@ -23,9 +23,9 @@ class DashboardController extends Controller
         // Carbon\Carbon::parse('2019-03-01')->translatedFormat('d F Y'); //Output: "01 Maret 2019"
         function sumReceiving($month)
         {
-            return Receiving::selectRaw("sum(target_qty) as qty, month(date) as month ")
-                ->whereMonth('date', $month)
-                ->whereYear('date', date('Y'))
+            return Receiving::selectRaw("sum(target_qty) as qty, month(tanggal) as month ")
+                ->whereMonth('tanggal', $month)
+                ->whereYear('tanggal', date('Y'))
                 ->groupBy('month')
                 ->first();
         }
@@ -33,11 +33,11 @@ class DashboardController extends Controller
 
         function sumIssuing($month)
         {
-            return Detail_Issuing::selectRaw('sum(qty) as qty, month(date) as month')
-                ->join('issuings', 'detail_issuings.issuing_id', '=', 'issuings.id')
+            return Detail_Issuing::selectRaw('sum(qty) as qty, month(tanggal) as month')
+                ->join('barang_keluars', 'detail_barang_keluars.barang_keluar_id', '=', 'barang_keluars.id')
                 ->groupBy('month')
-                ->whereMonth('date', $month)
-                ->whereYear('date', date('Y'))
+                ->whereMonth('tanggal', $month)
+                ->whereYear('tanggal', date('Y'))
                 ->first();
         }
 
@@ -48,28 +48,28 @@ class DashboardController extends Controller
             $sales[] = sumIssuing($i) != null ? sumIssuing($i)->qty : 0;
         }
 
-        $total_sales = Detail_Issuing::selectRaw('sum(qty) as qty, year(date) as year')
-            ->join('issuings', 'detail_issuings.issuing_id', '=', 'issuings.id')
+
+        $total_sales = Detail_Issuing::selectRaw('sum(qty) as qty, year(tanggal) as year')
+            ->join('barang_keluars', 'detail_barang_keluars.barang_keluar_id', '=', 'barang_keluars.id')
             ->groupBy('year')
-            ->whereYear('date', date('Y'))
+            ->whereYear('tanggal', date('Y'))
             ->first();
 
-        $total_order = Receiving::selectRaw("sum(target_qty) as qty, year(date) as year ")
-            ->whereYear('date', date('Y'))
+        $total_order = Receiving::selectRaw("sum(target_qty) as qty, year(tanggal) as year ")
+            ->whereYear('tanggal', date('Y'))
             ->groupBy('year')
             ->first();
-
 
         $sales_today = Issuing::with([
-            'detail_issuings.item.category_brand',
-            'detail_issuings.item.category_product',
+            'detail_barang_keluars.item.kategori_brand',
+            'detail_barang_keluars.item.kategori_produk',
             'customer'
         ])
-            ->where('date', date('Y-m-d'))
+            ->where('tanggal', date('Y-m-d'))
             ->get();
 
         // top 8 max item
-        $top_max_items =  Item::with('category_product:id,name')->orderBy('qty', 'desc')->limit(8)->get();
+        $top_max_items =  Item::with('kategori_produk:id,nama')->orderBy('qty', 'desc')->limit(8)->get();
 
         return view('pages.dashboard.index', [
             'orders' => $orders,

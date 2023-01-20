@@ -43,7 +43,7 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $user->name }}</td>
+                                <td class="p-3">{{ $user->nama }}</td>
                                 <td class="p-3">{{ $user->username }}</td>
                                 <td class="p-3">{{ $user->role }}</td>
                                 <td class="p-3">{{ $user->created_at }}</td>

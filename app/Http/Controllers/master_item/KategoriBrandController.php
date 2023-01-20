@@ -43,7 +43,9 @@ class KategoriBrandController extends Controller
             'name' => 'required',
         ]);
 
-        Category_brand::create($data);
+        Category_brand::create([
+            'nama' => $data['name']
+        ]);
 
         return redirect('/master/kategori-brand');
     }
@@ -70,6 +72,7 @@ class KategoriBrandController extends Controller
     {
         $data = Category_brand::where(['id' => $id])->first();
 
+
         return view('pages.master_item.kategori_brand.edit', [
             'data' => $data,
         ]);
@@ -84,12 +87,12 @@ class KategoriBrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $data = $request->validate([
             'name' => 'required',
         ]);
-
-        Category_brand::where('id', $id)->update($data);
+        Category_brand::where('id', $id)->update([
+            'nama' => $data['name']
+        ]);
         return redirect('/master/kategori-brand');
     }
 

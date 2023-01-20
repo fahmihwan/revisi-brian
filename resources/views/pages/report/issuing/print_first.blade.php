@@ -46,7 +46,7 @@
 
 <body>
     <div class="header">
-        <h4>Report Issuing</h4> <br>
+        <h4>Laporan Barang Keluar</h4> <br>
         <h6 style="">Buka Tutup Second</h6>
         <p style="">Jl Godean, Km 7 Semarangan, Sleman Daerah Istimewa Yogyakarta Kode Pos 55285</p>
     </div>
@@ -58,26 +58,24 @@
             </tr>
             <tr>
                 <td>Tanggal</td>
-                <td>{{ $item->date }}</td>
+                <td>{{ $item->tanggal }}</td>
             </tr>
             <tr>
                 <td>Customer</td>
-                <td>{{ $item->customer->name }}</td>
+                <td>{{ $item->customer->nama }}</td>
             </tr>
             <tr>
                 <td>Alamat</td>
-                <td>{{ $item->customer->address }}</td>
+                <td>{{ $item->customer->alamat }}</td>
             </tr>
             <tr>
                 <td>Items</td>
                 <td>
                     <ul>
-                        @foreach ($item->detail_issuings as $data)
-                            <li>{{ $data->item->name }} | {{ $data->qty }}</li>
+                        @foreach ($item->detail_barang_keluars as $data)
+                            <li>{{ $data->item->nama }} | {{ $data->qty }}</li>
                         @endforeach
                     </ul>
-
-
                 </td>
             </tr>
 

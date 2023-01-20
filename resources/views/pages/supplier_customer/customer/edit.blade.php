@@ -48,7 +48,7 @@
                                                  @error('name')
                                                     is-invalid
                                                 @enderror"
-                                                    id="name" placeholder="nama" value="{{ $data->name }}" required>
+                                                    id="name" placeholder="nama" value="{{ $data->nama }}" required>
                                                 @error('name')
                                                     <div class="valid-feedback">
                                                         <i class="bx bx-radio-circle"></i>
@@ -63,7 +63,7 @@
                                                  @error('address')
                                                     is-invalid
                                                 @enderror"
-                                                    id="address" placeholder="nomor hp" value="{{ $data->address }}"
+                                                    id="address" placeholder="nomor hp" value="{{ $data->alamat }}"
                                                     required>
                                                 @error('address')
                                                     <div class="valid-feedback">

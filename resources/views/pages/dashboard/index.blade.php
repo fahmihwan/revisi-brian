@@ -11,46 +11,12 @@
     </div>
     <section class="section">
         <div class="row mb-2">
-            {{-- <div class="col-12 col-md-3">
-                <div class="card card-statistic">
-                    <div class="card-body p-0">
-                        <div class="d-flex flex-column">
-                            <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>BALANCE</h3>
-                                <div class="card-right d-flex align-items-center">
-                                    <p>$50 </p>
-                                </div>
-                            </div>
-                            <div class="chart-wrapper">
-                                <canvas id="canvas1" style="height:100px !important"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            {{-- <div class="col-12 col-md-3">
-                <div class="card card-statistic">
-                    <div class="card-body p-0">
-                        <div class="d-flex flex-column">
-                            <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>Revenue</h3>
-                                <div class="card-right d-flex align-items-center">
-                                    <p>$532,2 </p>
-                                </div>
-                            </div>
-                            <div class="chart-wrapper">
-                                <canvas id="canvas2" style="height:100px !important"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
             <div class="col-12 col-md-6">
                 <div class="card card-statistic">
                     <div class="card-body p-0">
                         <div class="d-flex flex-column">
                             <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>ORDERS {{ date('Y') }}</h3>
+                                <h3 class='card-title'>Barang Masuk {{ date('Y') }}</h3>
                                 <div class="card-right d-flex align-items-center">
                                     <p>{{ $total_orders }} </p>
                                 </div>
@@ -67,7 +33,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex flex-column">
                             <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>Sales {{ date('Y') }}</h3>
+                                <h3 class='card-title'>Penjualan {{ date('Y') }}</h3>
                                 <div class="card-right d-flex align-items-center">
                                     <p>{{ $total_sales }} </p>
                                 </div>
@@ -84,7 +50,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class='card-heading p-1 pl-3'>Sales</h3>
+                        <h3 class='card-heading p-1 pl-3'>Grafik Penjualan</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -114,7 +80,7 @@
                 </div>
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">Orders Today</h4>
+                        <h4 class="card-title">Penjualan Hari Ini</h4>
                         <div class="d-flex ">
                             <i data-feather="download"></i>
                         </div>
@@ -141,8 +107,8 @@
                                             <td class="p-3">{{ $data->customer->address }}</td>
                                             <td class="p-3">
                                                 <ul class="p-0">
-                                                    @foreach ($data->detail_issuings as $detail)
-                                                        <li> {{ $detail->item->name }} - {{ $detail->item->qty }}</li>
+                                                    @foreach ($data->detail_barang_keluars as $detail)
+                                                        <li> {{ $detail->item->nama }} - {{ $detail->item->qty }}</li>
                                                     @endforeach
                                                 </ul>
                                             </td>
@@ -158,7 +124,7 @@
                 <div class="card widget-todo">
                     <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                         <h4 class="card-title d-flex">
-                            <i class='bx bx-check font-medium-5 pl-25 pr-75'></i> Top 8 Max Stock
+                            <i class='bx bx-check font-medium-5 pl-25 pr-75'></i> Top 8 Max Stok
                         </h4>
                     </div>
                     <div class="card-body px-0 py-1">
@@ -174,7 +140,7 @@
                                 @foreach ($top_max_item as $item)
                                     <tr>
                                         <td class="px-1 m-0">{{ $item->name }}</td>
-                                        <td class="px-1 m-0">{{ $item->category_product->name }}</td>
+                                        <td class="px-1 m-0">{{ $item->kategori_produk->nama }}</td>
                                         <td class="px-1 m-0">{{ $item->qty }}</td>
                                     </tr>
                                 @endforeach
@@ -489,7 +455,7 @@
             ctx.lineTo(x + width, y + height);
             // bottom left corner
             ctx.lineTo(x, y + height);
-            // top left	
+            // top left
             ctx.lineTo(x, y + radius);
             ctx.quadraticCurveTo(x, y, x + radius, y);
             ctx.closePath();

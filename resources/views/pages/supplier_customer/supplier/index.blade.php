@@ -32,7 +32,7 @@
                     <thead>
                         <tr>
                             <th class="p-3">No</th>
-                            <th class="p-3">Name</th>
+                            <th class="p-3">Nama</th>
                             <th class="p-3">Alamat</th>
                             <th class="p-3">Telp</th>
                             <th class="p-0">Action</th>
@@ -42,9 +42,9 @@
                         @foreach ($data_supplier as $supplier)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $supplier->name }}</td>
-                                <td class="p-3">{{ $supplier->address }}</td>
-                                <td class="p-3">{{ $supplier->phone_number }}</td>
+                                <td class="p-3">{{ $supplier->nama }}</td>
+                                <td class="p-3">{{ $supplier->alamat }}</td>
+                                <td class="p-3">{{ $supplier->telp }}</td>
                                 <td style="padding: 0px;">
                                     <a href="/supplier-customer/supplier/{{ $supplier->id }}/edit"
                                         class="btn badge btn-sm round btn-warning ">
