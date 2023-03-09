@@ -1,8 +1,8 @@
 @extends('component.main')
 
 @section('style')
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" /> --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
 @endsection
 
 @section('container')
@@ -44,27 +44,17 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group ">
-                                                <label for="valid-state">Pilih Produk</label>
-                                                <div class="form-group ">
-                                                    <select class="form-control js-example-basic-single-1"
-                                                        name="category_product_id">
-                                                        <option value="0"> -- pilih produk --</option>
-                                                        @foreach ($category_product as $product)
-                                                            <option value="{{ $product->id }}">
-                                                                {{ $product->nama }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group ">
+
                                                 <label for="valid-state">Pilih Item</label>
-                                                <div class="form-group ">
-                                                    <select class="form-control js-example-basic-single-2" name="item_id"
-                                                        style="">
-                                                        <option value="0"> -- pilih Item --</option>
-                                                    </select>
-                                                </div>
+                                                <select name="item_id" class="choices form-select"
+                                                    id="js-example-basic-single-2">
+                                                    <option value="0">cari item ...</option>
+                                                    @foreach ($items as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            [ {{ $item->kategori_produk->nama }} ] -- {{ $item->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex align-items-center justify-content-between">
@@ -188,83 +178,28 @@
 
 
 @section('script')
+    <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script>
     {{-- <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script> --}}
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/j    s/select2.min.js"></script> --}}
     <script>
-        // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function() {
-            $('.js-example-basic-single-1').select2();
-            $('.js-example-basic-single-2').select2();
-
-            $('#btn-plus').attr('disabled', true);
-
-            $('.js-example-basic-single-1').change(function(e) {
-                clearOption()
-                getProduct($(this).val())
-                $('#jml-item').html(` <span class="text-danger">  null </span>`)
-                $('#btn-plus').attr('disabled', true);
-            })
-
-            function getData(url) {
-                return $.ajax({
+            $('#js-example-basic-single-2').change(function(e) {
+                $.ajax({
                     type: 'GET',
-                    url: url,
-                });
-            }
-
-            async function getProduct(category_product_id) {
-                try {
-                    const res = await getData(`/transaction/issuing/${category_product_id}/get-item-ajax`)
-                    let text = "";
-                    let textData = []
-                    if (res.status == 200) {
-                        res.data.forEach(e => {
-
-                            textData.push({
-                                id: e.id,
-                                text: `[${e.nama}] -- ${e.nama}`,
+                    url: `/transaction/issuing/${$(this).val()}/get-valut-item-ajax`,
+                    success: function(data) {
+                        if (data.status == 200) {
+                            console.log(data.data);
+                            data.data.forEach(e => {
+                                $('#jml-item').html(e.qty)
                             })
-                        });
-
-                        $(".js-example-basic-single-2").prepend('<option></option>').select2({
-                            allowClear: true,
-                            placeholder: "Select...",
-                            data: textData,
-                            width: "100%"
-                        });
-
-
-                        $('.js-example-basic-single-2').change(function(e) {
-                            $.ajax({
-                                type: 'GET',
-                                url: `/transaction/issuing/${$(this).val()}/get-valut-item-ajax`,
-                                success: function(data) {
-                                    if (data.status == 200) {
-                                        data.data.forEach(e => {
-                                            $('#jml-item').html(e.qty)
-                                        })
-                                        $('#btn-plus').attr('disabled', false);
-                                    }
-                                }
-                            })
-
-                        })
-
+                            $('#btn-plus').attr('disabled', false);
+                        }
                     }
-                } catch (err) {
-                    alert(err);
-                }
-            }
-
-            function clearOption() {
-                $(".js-example-basic-single-2").empty();
-            }
-
-
-
-
-
-        });
+                })
+            })
+        })
     </script>
 @endsection

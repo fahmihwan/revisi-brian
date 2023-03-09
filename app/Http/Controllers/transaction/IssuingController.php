@@ -20,7 +20,6 @@ class IssuingController extends Controller
      */
     public function index()
     {
-
         $data = Issuing::with(['customer:id,nama,alamat', 'detail_barang_keluars'])
             ->withSum('detail_barang_keluars', 'qty')
             ->latest()->get();
@@ -37,8 +36,8 @@ class IssuingController extends Controller
      */
     public function create()
     {
-
-        $items = Item::with(['kategori_brand'])->get();;
+        $items = Item::with(['kategori_brand', 'kategori_produk'])->get();;
+        // return $items;
         $category_product = Category_product::all();
 
         $detail_issuing = Detail_Issuing::with([
@@ -48,8 +47,6 @@ class IssuingController extends Controller
         ])
             ->where('barang_keluar_id', 0)
             ->get();
-
-
 
         return view('pages.transaction.issuing.create', [
             'items' => $items,

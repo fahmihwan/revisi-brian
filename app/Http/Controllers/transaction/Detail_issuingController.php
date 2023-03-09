@@ -39,8 +39,9 @@ class Detail_issuingController extends Controller
     public function store(Request $request)
     {
 
+
         $valdated = $request->validate([
-            'category_product_id' => 'required|numeric',
+            // 'category_product_id' => 'required|numeric',
             'item_id' => 'required|numeric',
             'qty' => 'required|numeric',
         ]);
