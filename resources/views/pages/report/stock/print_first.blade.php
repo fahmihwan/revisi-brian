@@ -37,7 +37,7 @@
         table,
         td {
             padding: 20px;
-            border: 0.2px solid rgb(162, 162, 162);
+            border: 1px solid black;
             border-collapse: collapse;
             font-size: 9pt;
         }
