@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Item;
 
 
-use PDF;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class ReportStockController extends Controller
 {

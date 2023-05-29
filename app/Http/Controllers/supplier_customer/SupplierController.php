@@ -5,6 +5,7 @@ namespace App\Http\Controllers\supplier_customer;
 use App\Http\Controllers\Controller;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SupplierController extends Controller
 {
@@ -15,7 +16,29 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $supplier = Supplier::all();
+        // print
+        if (request('print')) {
+            $data = Supplier::latest()->whereDate('created_at', '>=', request('start_date'))
+                ->whereDate('created_at', '<=', request('end_date'))->get();
+
+            if ($data->count() == 0) {
+                return redirect('/supplier-customer/supplier')->withErrors('Data tanggal ' . request('start_date') . ' sampai ' . request('end_date') . ' tidak ada');
+            }
+
+            $pdf = Pdf::loadView('pages.supplier_customer.supplier.print_supplier', [
+                'datas' => $data
+            ]);
+            return $pdf->download('supplier.pdf');
+        }
+
+        // search
+        if (request('start_date')) {
+            $supplier = Supplier::latest()->whereDate('created_at', '>=', request('start_date'))
+                ->whereDate('created_at', '<=', request('end_date'))->get();
+        } else {
+            $supplier = Supplier::latest()->get();
+        }
+
         return view('pages.supplier_customer.supplier.index', [
             'data_supplier' => $supplier
         ]);

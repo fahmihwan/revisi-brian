@@ -93,7 +93,14 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        @php
+                            $total = 0;
+                        @endphp
                         @foreach ($datas as $data)
+                            @php
+                                $total += $data->harga;
+                            @endphp
                             <tr class="p-0 m-0 ">
                                 <td class="p-2">{{ $loop->iteration }}</td>
                                 <td class="p-2" style="width: 115px;">{{ $data->tanggal }}</td>
@@ -113,6 +120,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="float-end">
+                    <p>total : Rp{{ $total }}</p>
+                </div>
             </div>
         </div>
     </section>

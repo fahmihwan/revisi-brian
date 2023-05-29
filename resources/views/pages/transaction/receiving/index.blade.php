@@ -42,7 +42,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $total = 0;
+                        @endphp
                         @foreach ($receiving_data as $data)
+                            @php
+                                $total += $data->harga;
+                            @endphp
                             <tr class="p-0 m-0  ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
                                 <td class="p-3">{{ $data->tanggal }}</td>
@@ -67,6 +73,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="float-end">
+                    <p>total : Rp{{ $total }}</p>
+                </div>
             </div>
         </div>
     </section>

@@ -40,7 +40,7 @@
 
 <body>
     <div class="header">
-        <h4>Report Receiving </h4> <br>
+        <h4>Report Supplier</h4> <br>
         <h6 style="font-size: 12px;">Buka Tutup Second</h6>
         <p style="font-size: 12px">Jl Godean, Km 7 Semarangan, Sleman Daerah Istimewa Yogyakarta Kode Pos 55285</p>
         <p style="margin: 5px">Periode : {{ request('start_date') }} sampai {{ request('end_date') }}</p>
@@ -50,37 +50,23 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Kode Ball</th>
-                    <th>Supplier</th>
-                    <th>Kategori</th>
-                    <th>Target Qty</th>
-                    <th>Open Qty</th>
-                    <th>Total Harga</th>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>Telp</th>
                 </tr>
             </thead>
             <tbody>
-                <?php $total = 0; ?>;
                 @foreach ($datas as $data)
-                    <?php $total += $data->harga; ?>;
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $data->tanggal }}</td>
-                        <td>{{ $data->kode_ball }}</td>
-                        <td>{{ $data->supplier->nama }}</td>
-                        <td>{{ $data->kategori_produk->nama }}</td>
-                        <td>{{ $data->target_qty }}</td>
-                        <td>{{ $data->open_qty }}</td>
-                        <td>{{ 'Rp' . $data->harga }}</td>
+                        <td>{{ $data->nama }}</td>
+                        <td>{{ $data->alamat }}</td>
+                        <td>{{ $data->telp }}</td>
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="7">total</td>
-                    <td colspan="1">Rp.{{ $total }}</td>
-                </tr>
-            </tfoot>
+
+
 
         </table>
     </div>
