@@ -71,7 +71,14 @@
 
         </table>
     </div>
-
+    <div style="padding: 20px; width: 200px; float: right; margin-top: 60px;">
+        Yogyakarta, {{date('d-m-Y')}}
+        <br>
+        <br>
+        <br>
+        <br>
+        <p style="text-align: center">{{auth()->user()->nama}}</p>
+    </div>
 </body>
 
 </html>

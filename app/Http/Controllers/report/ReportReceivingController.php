@@ -17,6 +17,7 @@ class ReportReceivingController extends Controller
             if ($data->count() == 0) {
                 return redirect('/report/receiving')->withErrors('Data tanggal ' . request('start_date') . ' sampai ' . request('end_date') . ' tidak ada');
             }
+
             $pdf = Pdf::loadView('pages.report.receiving.print_date', [
                 'datas' => $data->get()
             ]);
@@ -46,6 +47,6 @@ class ReportReceivingController extends Controller
             'item' => $data
         ]);
 
-        return $pdf->download('laporan-receiving-pdf');
+        return $pdf->download('laporan-receiving-pdf.pdf');
     }
 }

@@ -46,6 +46,6 @@ class ReportIssuingController extends Controller
             'item' => $data
         ]);
 
-        return $pdf->download('laporan-issuing-pdf');
+        return $pdf->download('laporan-issuing-pdf.pdf');
     }
 }

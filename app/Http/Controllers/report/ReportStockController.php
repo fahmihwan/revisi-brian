@@ -28,7 +28,7 @@ class ReportStockController extends Controller
         $pdf = PDF::loadview('pages.report.stock.print_first', [
             'item' => $item
         ]);
-        return $pdf->download('laporan-stok-pdf');
+        return $pdf->download('laporan-stok-pdf.pdf');
     }
 
 
@@ -44,6 +44,6 @@ class ReportStockController extends Controller
             'items' => $item
         ]);
 
-        return $pdf->download('laporan-stok-pdf');
+        return $pdf->download('laporan-stok-pdf.pdf');
     }
 }

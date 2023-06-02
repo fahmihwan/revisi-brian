@@ -41,7 +41,7 @@
 <body>
     <div class="header">
         <h4>Report Receiving </h4> <br>
-        <h6 style="font-size: 12px;">Buka Tutup Second</h6>
+        <h6 style="font-size: 12px;">Buka Tutup Second </h6>
         <p style="font-size: 12px">Jl Godean, Km 7 Semarangan, Sleman Daerah Istimewa Yogyakarta Kode Pos 55285</p>
         <p style="margin: 5px">Periode : {{ request('start_date') }} sampai {{ request('end_date') }}</p>
     </div>
@@ -60,9 +60,9 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $total = 0; ?>;
+                <?php $total = 0; ?>
                 @foreach ($datas as $data)
-                    <?php $total += $data->harga; ?>;
+                    <?php $total += $data->harga; ?>
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->tanggal }}</td>
@@ -81,8 +81,15 @@
                     <td colspan="1">Rp.{{ $total }}</td>
                 </tr>
             </tfoot>
-
         </table>
+    </div>
+    <div style="padding: 20px; width: 200px; float: right; margin-top: 60px;">
+        Yogyakarta, {{date('d-m-Y')}}
+        <br>
+        <br>
+        <br>
+        <br>
+        <p style="text-align: center">{{auth()->user()->nama}}</p>
     </div>
 
 </body>
