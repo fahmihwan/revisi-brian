@@ -71,14 +71,14 @@
                         <td>{{ $data->kategori_produk->nama }}</td>
                         <td>{{ $data->target_qty }}</td>
                         <td>{{ $data->open_qty }}</td>
-                        <td>{{ 'Rp' . $data->harga }}</td>
+                        <td style="text-align: right">{{ 'Rp' . $data->harga }}</td>
                     </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="7">total</td>
-                    <td colspan="1">Rp.{{ $total }}</td>
+                    <td colspan="1" style="text-align: right">Rp.{{ $total }}</td>
                 </tr>
             </tfoot>
         </table>
